@@ -11,19 +11,10 @@
 |
 */
 
-Route::get('/', function()
+
+Route::group(array('before' => 'auth','prefix' => 'users'), function()
 {
-	return View::make('hello');
+    Route::controller('setting','SettingController');
 });
-Route::get('/hello', 'HomeController@index');
-Route::get('/login', 'LoginController@index');
-Route::post('/register', 'LoginController@register');
-/* 生成二维码*/
-Route::get('/index', function()
-{	
-	$PNG_TEMP_DIR = dirname(__FILE__).DIRECTORY_SEPARATOR.'temp'.DIRECTORY_SEPARATOR;
-	$filename = $PNG_TEMP_DIR.time().'.png';
-        echo 'You can provide data in GET parameter: <a href="?data=like_that">like that</a><hr/>';    
-	QRcode::png('http://www.baidu.com/',$filename);
-	return $filename;
-});
+
+Route::controller('users','UsersController');
