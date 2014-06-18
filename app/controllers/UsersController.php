@@ -16,6 +16,11 @@ class UsersController extends \BaseController {
         return View::make('users.register');
     }
 
+    public function postRegister()
+    {
+        return View::make('users.login');
+    }
+
     public function getLogin()
     {
         return View::make('users.login');

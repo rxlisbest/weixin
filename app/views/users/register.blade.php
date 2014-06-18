@@ -7,9 +7,12 @@
                 <h4 class="header green lighter bigger"><i class="icon-group blue"></i> New User Registration</h4>
                 <div class="space-6"></div>
                 <p>Enter your details to begin:</p>
-                <form name="registerForm" novalidate>
+                {{ Form::open(array('url'=>'users/register', 'class'=>'form-signin')) }}
                     <fieldset>
                         <label>
+            		@if(Session::has('message'))
+                    		{{ Session::get('message') }}
+            		@endif
                             <font color="red">Email</font>
                             <span class="block input-icon input-icon-right">
                                 <input type="email" class="span12" placeholder="Email" required/>
@@ -50,7 +53,7 @@
                     </div>
 
                     </fieldset>
-                </form>
+                {{ Form::close() }}
             </div>
 
             <div class="toolbar center">

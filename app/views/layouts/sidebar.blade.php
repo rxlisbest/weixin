@@ -1,3 +1,4 @@
+@section('sidebar')
 <div id="sidebar">
     <div id="sidebar-shortcuts">
         <div id="sidebar-shortcuts-large">
@@ -16,7 +17,7 @@
 
     <ul class="nav nav-list">
         <li>
-            <a href="{{ Url::to('users/setting') }}">
+            <a href="{{ URL::to('setting') }}">
                 <i class="icon-dashboard"></i>
                 <span>系统设置</span>
             </a>
@@ -25,3 +26,4 @@
 
     <div id="sidebar-collapse"><i class="icon-double-angle-left"></i></div>
 </div><!--/#sidebar-->
+@stop

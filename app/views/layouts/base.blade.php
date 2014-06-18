@@ -205,7 +205,7 @@
                         <a class="user-menu dropdown-toggle" href="#" data-toggle="dropdown">
                             <img alt="Jason's Photo" src="avatars/user.jpg" class="nav-user-photo" />
                             <span id="user_info">
-                                <small>Welcome,</small> {{ Auth::user()->username }}
+                                <small>Welcome,</small> {{ Auth::user()?Auth::user()->username:'' }}
                             </span>
                             <i class="icon-caret-down"></i>
                         </a>
@@ -213,7 +213,7 @@
                             <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
                             <li><a href="#"><i class="icon-user"></i> Profile</a></li>
                             <li class="divider"></li>
-                            <li><a href="#"><i class="icon-off"></i> Logout</a></li>
+                            <li><a href="{{ URL::to('users/logout') }}"><i class="icon-off"></i> Logout</a></li>
                         </ul>
                     </li>
               </ul><!--/.ace-nav-->
@@ -223,7 +223,8 @@
         <div class="container-fluid" id="main-container">
             <a href="#" id="menu-toggler"><span></span></a><!-- menu toggler -->
 
-            @include('layouts.sidebar')
+	@section('sidebar')
+	@show
 
             <div id="main-content" class="clearfix">
 
@@ -296,7 +297,20 @@
         <!-- ace scripts -->
         <script src="/statics/js/ace-elements.min.js"></script>
         <script src="/statics/js/ace.min.js"></script>
+        <script charset="utf-8" src="/statics/kindeditor/kindeditor.js"></script>
+        <script charset="utf-8" src="/statics/kindeditor/lang/zh_CN.js"></script>
+	<link rel="stylesheet" href="/statics/kindeditor/themes/default/default.css" />
         <!-- inline scripts related to this page -->
+	<script type="text/javascript">
+		$(function() {
+			var editor = KindEditor.create('textarea[name="detail"]',{
+				afterBlur: function () { this.sync(); }
+			});
+		});
+		KindEditor.ready(function(K){
+			window.editor = K.create('#editor_id');
+		});
+	</script>
 
         <script type="text/javascript">
 

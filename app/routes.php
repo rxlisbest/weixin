@@ -12,9 +12,10 @@
 */
 
 
-Route::group(array('before' => 'auth','prefix' => 'users'), function()
+Route::group(array('before' => 'auth'), function()
 {
-    Route::controller('setting','SettingController');
+    	Route::controller('setting','SettingController');
+	Route::controller('shop','ShopController');
 });
 
 Route::controller('users','UsersController');
