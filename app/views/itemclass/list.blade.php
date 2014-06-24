@@ -30,9 +30,9 @@
 						<div class="inline position-relative">
 							<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
 							<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
-								<li><a href="{{URL::to('shop/editclass')}}/{{$item->id}}" class="tooltip-success" data-rel="tooltip" title="Edit" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
+								<li><a href="{{URL::to('itemclass/edit')}}/{{$item->id}}" class="tooltip-success" data-rel="tooltip" title="Edit" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
 								<li><a href="#" class="tooltip-warning" data-rel="tooltip" title="Flag" data-placement="left"><span class="blue"><i class="icon-flag"></i></span> </a></li>
-								<li><a href="{{URL::to('shop/delclass')}}/{{$item->id}}" class="tooltip-error" data-rel="tooltip" title="Delete" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
+								<li><a href="{{URL::to('itemclass/del')}}/{{$item->id}}" class="tooltip-error" data-rel="tooltip" title="Delete" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
 							</ul>
 						</div>
 					</td>

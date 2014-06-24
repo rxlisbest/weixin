@@ -5,7 +5,7 @@
 
 <div class="row-fluid">
     <div class="span12">
-        <form action="{{ URL::to('shop/add') }}" method="POST" class="form-horizontal">
+        <form action="{{ URL::to('item/add') }}" method="POST" class="form-horizontal">
 
             {{ Session::get('message') }}
 
@@ -20,18 +20,18 @@
             @endforeach
 
             <div class="control-group">
-                <label for="name" class="control-label">商品名称</label>
+                <label for="title" class="control-label">商品名称</label>
                 <div class="controls">
-                    <input type="text" name="name" id="name" placeholder="name" value="">
+                    <input type="text" name="title" id="title" placeholder="title" value="">
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="class_path">所属分类</label>
+                <label class="control-label" for="cate_id">所属分类</label>
                 <div class="controls">
-                    <select name="class_path" id="class_path">
+                    <select name="cate_id" id="cate_id">
             		@foreach($classes as $class)
-                        <option value="{{$class->path}}">{{$class->name}}</option>
+                        <option value="{{$class->id}}">{{$class->name}}</option>
             		@endforeach
                         <!--<option value="Image">图片</option>-->
                         <!--<option value="Voice">语音</option>-->
@@ -43,30 +43,52 @@
             </div>
 
             <div class="control-group">
-                <label for="standard_price" class="control-label">市场价</label>
+                <label for="intro" class="control-label">商品简介</label>
                 <div class="controls">
-                    <input type="text" name="standard_price" id="standard_price" placeholder="￥0.00" value="">
+                    <textarea name="intro" cols="80" rows="2"></textarea>
                 </div>
             </div>
 
             <div class="control-group">
-                <label for="retail_price" class="control-label">折扣价</label>
+                <label for="price" class="control-label">商品价格</label>
                 <div class="controls">
-                    <input type="text" name="retail_price" id="retail_price" placeholder="￥0.00" value="">
+                    <input type="text" name="price" id="price" placeholder="￥0.00" value="">
                 </div>
             </div>
 
             <div class="control-group">
-                <label for="number" class="control-label">库存</label>
+                <label for="goods_stock" class="control-label">库存</label>
                 <div class="controls">
-                    <input type="text" name="number" id="number" placeholder="" value="">
+                    <input type="text" name="goods_stock" id="goods_stock" placeholder="" value="">
                 </div>
             </div>
 
             <div class="control-group">
-                <label for="detail" class="control-label">商品详情</label>
+                <label for="appsecret" class="control-label">审核状态</label>
                 <div class="controls">
-			<textarea id="editor_id" name="detail" style="width:700px;height:500px;"></textarea>
+                    <label>
+                        <input type="checkbox" name="news"><span class="lbl">新品</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" name="tuijian"><span class="lbl">推荐</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="free">运费</label>
+                <div class="controls">
+                    <select name="free" id="free">
+                        <option value="1">卖家承担运费</option>
+                        <option value="2">买家承担运费</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="info" class="control-label">商品详情</label>
+                <div class="controls">
+			         <textarea id="editor_id" name="info" style="width:700px;height:500px;"></textarea>
                 </div>
             </div>
 

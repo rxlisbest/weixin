@@ -22,28 +22,28 @@
 									
 			<tbody>
 			
-            			@foreach($items as $item)
+			@foreach($items as $item)
 				<tr>
 					<td class='center'>
 						<label><input type='checkbox' /><span class="lbl"></span></label>
 					</td>
-					<td>{{$item->name}}</td>
-					<td>{{$item->standard_price}}</td>
-					<td>{{$item->retail_price}}</td>
-					<td>{{$item->number}}</td>
-					<td>{{$item->weixingoodsclass->name}}</td>
+					<td>{{$item->title}}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 					<td>
 						<div class="inline position-relative">
 							<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
 							<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
-								<li><a href="{{URL::to('shop/edit')}}/{{$item->id}}" class="tooltip-success" data-rel="tooltip" title="Edit" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
+								<li><a href="{{URL::to('item/edit')}}/{{$item->id}}" class="tooltip-success" data-rel="tooltip" title="Edit" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
 								<li><a href="#" class="tooltip-warning" data-rel="tooltip" title="Flag" data-placement="left"><span class="blue"><i class="icon-flag"></i></span> </a></li>
-								<li><a href="{{URL::to('shop/del')}}/{{$item->id}}" class="tooltip-error" data-rel="tooltip" title="Delete" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
+								<li><a href="{{URL::to('item/del')}}/{{$item->id}}" class="tooltip-error" data-rel="tooltip" title="Delete" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
 							</ul>
 						</div>
 					</td>
 				</tr>
-            			@endforeach
+			@endforeach
 			</tbody>
 		</table>
     </div>

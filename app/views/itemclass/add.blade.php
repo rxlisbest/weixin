@@ -5,7 +5,7 @@
 
 <div class="row-fluid">
     <div class="span12">
-        <form action="{{ URL::to('shop/editclass') }}/{{$class->id}}" method="POST" class="form-horizontal">
+        <form action="{{ URL::to('itemclass/add') }}" method="POST" class="form-horizontal">
 
             {{ Session::get('message') }}
 
@@ -22,13 +22,31 @@
             <div class="control-group">
                 <label for="AppID" class="control-label">分类名称</label>
                 <div class="controls">
-                    <input type="text" name="name" id="name" placeholder="name" value="{{ $class->name}}">
+                    <input type="text" name="name" id="name" placeholder="name" value="">
                 </div>
             </div>
+
             <div class="control-group">
-                <label for="appsecret" class="control-label">分类排序</label>
+                <label for="appsecret" class="control-label">首页显示</label>
                 <div class="controls">
-                    <input type="text" name="sort" id="sort" placeholder="sort" value="{{ $class->sort}}">
+                    <label>
+                        <input type="radio" name="is_index" value="0" ><span class="lbl">不显示</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="is_index" value="1" checked><span class="lbl">显示</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="appsecret" class="control-label">审核状态</label>
+                <div class="controls">
+                    <label>
+                        <input type="radio" name="status" value="0" ><span class="lbl">未审核</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="status" value="1" checked><span class="lbl">己审核</span>
+                    </label>
                 </div>
             </div>
 
