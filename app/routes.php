@@ -17,6 +17,7 @@ Route::group(array('before' => 'auth'), function()
     	Route::controller('setting','SettingController');
 	
 });
+Route::controller('shopitem','ShopItemController');
 Route::controller('item','ItemController');
 Route::controller('itemclass','ItemclassController');
 Route::controller('users','UsersController');
