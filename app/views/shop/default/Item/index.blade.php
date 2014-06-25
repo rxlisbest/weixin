@@ -2,7 +2,7 @@
 <!-- saved from url=(0048)http://store.weiapps.cn/index.php -->
 <html>
 <head>
-<include file="public:headtop" />
+@include('shop/default/public/headtop')
 	<script charset="utf-8" src="__STATIC__/weixin/js/goodsinfo.js" type="text/javascript"></script>
 	<script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
 	<script charset="utf-8" src="__STATIC__/weixin/js/colorbox.js" type="text/javascript"></script>
@@ -12,7 +12,7 @@
 
 
 <body>
-<include file="public:head" />
+@include('shop/default/public/head')
 <div class="s_bottom"></div>
 <script type="text/javascript">
 $(function(){
@@ -69,7 +69,7 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
     function add_cart(goodId,quantity)//商品ID，购买数量
     {
     	
-     	var url  = "{:U('Shopcart/add_cart')}";
+     	var url  = "{{URL::to('shopcart/addcart')}}";
      	$.post(url,{goodId:goodId,quantity:quantity},function(data){
      		
      		if(data.status==1)
@@ -77,16 +77,16 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
      			
      			$('.dialog_title').html(data.msg);
      			$('.bold_num').text(data.count);
-     			 $('.bold_mly').html(data.sumPrice);
-     			 $('.ware_cen').slideDown('slow');
-     			 setTimeout(slideUp_fn, 5000);
+     			$('.bold_mly').html(data.sumPrice);
+     			$('.ware_cen').slideDown('slow');
+     			setTimeout(slideUp_fn, 5000);
      		}else
      		{
      			$('.dialog_title').html(data.msg);
      			$('.bold_num').text(data.count);
-     			 $('.bold_mly').html(data.sumPrice);
-     			 $('.ware_cen').slideDown('slow');
-     			 setTimeout(slideUp_fn, 5000);
+     			$('.bold_mly').html(data.sumPrice);
+     			$('.ware_cen').slideDown('slow');
+     			setTimeout(slideUp_fn, 5000);
      		}
      	},'json');	
     }
@@ -159,14 +159,14 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
                     as[active].className='active';
                 }});
             </script>
-            <input type="hidden" value="{$item.id}" id="goodId" >
+            <input type="hidden" value="{{$item->id}}" id="goodId" >
         <div class="ware_text">
             <div class="rate">
-                <h2 class="ware_title">{$item.title}</h2>       	
+                <h2 class="ware_title">{{$item->title}}</h2>       	
                 <span class="letterprice">现价: </span>
-                <span ectype="goods_price" class="fontColor3">¥{$item.price}</span><br>                       
-                <span class="letter1">品牌: </span>{$item.brand}<br>
-                销售情况: 售出 {$item.buy_num} 件<br>
+                <span ectype="goods_price" class="fontColor3">¥{{$item->price}}</span><br>                       
+                <span class="letter1">品牌: </span>{{$item->brand}}<br>
+                销售情况: 售出 {{$item->buy_num}} 件<br>
                 所在地区: 中国                        
             </div>
             <div class="handle">
@@ -174,7 +174,7 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
                     <li class="handle_title">购买数量: </li>
                     <li>
                         <input type="text" value="1" id="quantity" name="" class="text width1" onafterpaste="this.value=this.value.replace(/\D/g,'')" onkeyup="this.value=this.value.replace(/\D/g,'')" />
-                        件（库存<span ectype="goods_stock" class="stock">{$item.goods_stock}</span>件）
+                        件（库存<span ectype="goods_stock" class="stock">{{$item->goods_stock}}</span>件）
                     </li>
                 </ul>
             </div>
@@ -209,13 +209,13 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
     </ul>
     <div class="option_box">
         <div class="default">
-        {$item.info}
+        {{$item->info}}
         </div>
     </div>
     <div class="clear"></div>
 </div>
 
-<include file="public:footer" />
+@include('shop/default/public/footer')
 
 </body>
 </html>

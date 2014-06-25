@@ -1,6 +1,4 @@
 
-
-
 <div id="head">
 	<img height="50" src="__PUBLIC__/images/store_logo.jpg">
 </div>
@@ -9,13 +7,12 @@
     	<li id="n_0">
     	<span ></span>
         	<ul class="submenu">
- 
-        	<volist name='index_cate_list' id='vo' >
-        	   <li>
-                    <a href="{:U('book/cate',array('cid'=>$vo['id']))}" class="none_ico"> {$vo.name}</a>
-                </li>
+            @foreach($index_cate_list as $vo)
+            <li>
+                <a href="{:U('book/cate',array('cid'=>$vo['id']))}" class="none_ico"> {{$vo->name}}</a>
+            </li>
           
-            </volist>
+            @endforeach
              
             
             </ul>

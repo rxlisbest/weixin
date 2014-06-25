@@ -17,7 +17,20 @@ Route::group(array('before' => 'auth'), function()
     	Route::controller('setting','SettingController');
 	
 });
+/*微信网站*/
+Route::controller('shopindex','ShopIndexController');
 Route::controller('shopitem','ShopItemController');
+Route::controller('shopbook','ShopBookController');
+Route::controller('shopcart','ShopCartController');
+
+
 Route::controller('item','ItemController');
 Route::controller('itemclass','ItemclassController');
 Route::controller('users','UsersController');
+
+Route::get('test',function(){
+	/*$cart = new Cart();
+	$cart->test(1);*/
+	//Session::forget('cart');
+	return Session::get('cart')["124"];
+});

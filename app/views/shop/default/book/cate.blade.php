@@ -2,11 +2,12 @@
 <!-- saved from url=(0048)http://store.weiapps.cn/index.php -->
 <html>
 <head>
-<include file="public:headtop" />
+@include('shop/default/public/headtop')
+
 </head>
 
 <body>
-<include file="public:head" />
+@include('shop/default/public/head')
 <div class="s_bottom"></div>
 <script type="text/javascript">
 $(function(){
@@ -44,24 +45,24 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
         <div class="wrap">
             <div class="wrap_child">
                 <div class="major">
-                     <ul class="list">
-                     <volist name="item_list" id="item">
-                      <li>
-                    <div class="pic">
-                     <a href="{:U('Item/index',array('id'=>$item['id']))}"><img  src="{:attach(get_thumb($item['img'], '_b'), 'item')}"></a>
-                    </div>
-                   <div class="good_content">
-                    <h3>
-                    <a  href="{:U('Item/index',array('id'=>$item['id']))}">{$item.title}</a>
-                   </h3>
-                    <p>¥{$item.price}</p>
-                    </div>
-                    <span class="show_good">
-                      <a  href="{:U('Item/index',array('id'=>$item['id']))}"></a>
-                    </span>
-                      </li>
-                      </volist>
-                   </ul>
+                    <ul class="list">
+                    @foreach($items as $item)
+                    <li>
+                        <div class="pic">
+                            <a href="{:U('Item/index',array('id'=>$item['id']))}"><img  src="{:attach(get_thumb($item['img'], '_b'), 'item')}"></a>
+                        </div>
+                        <div class="good_content">
+                            <h3>
+                              <a  href="{:U('Item/index',array('id'=>$item['id']))}">{{$item->title}}</a>
+                            </h3>
+                            <p>¥{{$item->price}}</p>
+                        </div>
+                        <span class="show_good">
+                            <a  href="{:U('Item/index',array('id'=>$item['id']))}"></a>
+                        </span>
+                    </li>
+                    @endforeach
+                </ul>
       <!-- <div class="wall_wrap clearfix">
         <div id="J_waterfall" class="wall_container clearfix" data-uri="__ROOT__/?m=book&a=cate_ajax&cid={$cate_info.id}&p={$p}">
            
@@ -87,7 +88,7 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
     </div>
 </div>
 
-<include file="public:footer" />
+@include('shop/default/public/footer')
 
 
 </body>
