@@ -7,19 +7,16 @@
     	<li id="n_0">
     	<span ></span>
         	<ul class="submenu">
-            @foreach($index_cate_list as $vo)
-            <li>
-                <a href="{:U('book/cate',array('cid'=>$vo['id']))}" class="none_ico"> {{$vo->name}}</a>
-            </li>
-          
-            @endforeach
-             
-            
-            </ul>
+		    @foreach($index_cate_list as $vo)
+		    <li>
+			<a href="{{URL::to('shopbook/cate')}}/{{$vo->id}}" class="none_ico"> {{$vo->name}}</a>
+		    </li>
+		    @endforeach
+            	</ul>
         </li>
-        <li class="r active" id="n_1"><a href="{:U('Index/index')}"><span></span></a></li>
-        <li class="r" id="n_2"><a href="{:U('User/index')}"><span></span></a></li>
-        <li class="r" id="n_3"><a href="{:U('Shopcart/index')}"><span></span></a><i></i></li>
+        <li class="r active" id="n_1"><a href="{{URL::to('shopindex/index')}}"><span></span></a></li>
+        <li class="r" id="n_2"><a href="{{URL::to('User/index')}}"><span></span></a></li>
+        <li class="r" id="n_3"><a href="{{URL::to('shopcart/index')}}"><span></span></a><i></i></li>
     </ul>
     <script type="text/javascript">
     	$(".navlist > li#n_0").click(function(){
@@ -27,7 +24,7 @@
 			
 		});
 		$(".navlist > li.r a").each(function() {
-            href="index.php-app=member&act=login&ret_url=-index.php-app=member.htm"+$(this).attr("href");
+            href=$(this).attr("href");
 			whref=window.location.href;
 			if(whref.indexOf(href)!='-1'){
 				$(this).parent("li").addClass("active");

@@ -3,10 +3,10 @@
 <html>
 <head>
 @include('shop/default/public/headtop')
-	<script charset="utf-8" src="__STATIC__/weixin/js/goodsinfo.js" type="text/javascript"></script>
-	<script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
-	<script charset="utf-8" src="__STATIC__/weixin/js/colorbox.js" type="text/javascript"></script>
-	<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/colorbox.css">
+	<script charset="utf-8" src="/statics/shop/default/js/goodsinfo.js" type="text/javascript"></script>
+	<script charset="utf-8" src="/statics/shop/default/js/jquery.js" type="text/javascript"></script>
+	<script charset="utf-8" src="/statics/shop/default/js/colorbox.js" type="text/javascript"></script>
+	<link type="text/css" rel="stylesheet" href="/statics/shop/default/colorbox.css">
 </head>
 
 

@@ -49,16 +49,16 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
                     @foreach($items as $item)
                     <li>
                         <div class="pic">
-                            <a href="{:U('Item/index',array('id'=>$item['id']))}"><img  src="{:attach(get_thumb($item['img'], '_b'), 'item')}"></a>
+                            <a href="{{URL::to('shopitem/detail')}}/{{$item->id}}"><img  src="{:attach(get_thumb($item['img'], '_b'), 'item')}"></a>
                         </div>
                         <div class="good_content">
                             <h3>
-                              <a  href="{:U('Item/index',array('id'=>$item['id']))}">{{$item->title}}</a>
+                              <a  href="{{URL::to('shopitem/detail')}}/{{$item->id}}">{{$item->title}}</a>
                             </h3>
                             <p>¥{{$item->price}}</p>
                         </div>
                         <span class="show_good">
-                            <a  href="{:U('Item/index',array('id'=>$item['id']))}"></a>
+                            <a  href="{{URL::to('shopitem/detail')}}/{{$item->id}}"></a>
                         </span>
                     </li>
                     @endforeach

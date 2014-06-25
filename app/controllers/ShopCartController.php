@@ -14,7 +14,7 @@ class ShopCartController extends \BaseController {
     public function postAddcart()
     {	
         
-	  	$cart = new Cart();
+	$cart = new Cart();
     	
     	$goodId = Input::get('goodId');//商品ID
     	$quantity = Input::get('quantity');//购买数量
