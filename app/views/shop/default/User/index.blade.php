@@ -36,7 +36,7 @@
     <div class="wrap">
         <div class="public">
         
-            <notempty name="item_orders">
+	@if(!empty($item_orders))
             @foreach($item_orders AS $vo)
             <div class="order_form">
                     <p class="num">订单号: {{$vo["orderId"]}}</p>
@@ -55,33 +55,27 @@
                             <div style="float:left;">
                                 订单总价: <b id="order118_order_amount">¥{{$vo["order_sumPrice"]}}&nbsp;&nbsp;</b>
                             </div>   
-                         <switch name="vo.status" >
-                         <case value="1"><!--待付款 -->
-                           <a href="{:U('order/pay',array('orderId'=>$vo['orderId']))}" id="order118_action_pay" class="btn">付款</a>
-                          
-                            <a href="{{URL::to('shoporder/cancelorder')}}/{{$vo['orderId']}}" id="order118_action_cancel"> 取消订单</a>
-                            <a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看订单</a>
-                         </case>
-                         <case value="2"><!--待发货 -->
-                            <a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看订单</a>
-                         </case>
-                         <case value="3"><!-- 待收货 -->
-                            <a href="{:U('order/confirmOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" id="order118_action_confirm" >确认收货</a>
-                            <a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看订单</a>
-                         </case>
-                        <default />
-                         <a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看订单</a>
-                        </switch>                     
+			@if($vo["status"]==1)
+                        	<a href="{:U('order/pay',array('orderId'=>$vo['orderId']))}" id="order118_action_pay" class="btn">付款</a><!--待付款 -->
+				<a href="{{URL::to('shoporder/cancelorder')}}/{{$vo['orderId']}}" id="order118_action_cancel"> 取消订单</a>
+                         	<a href="{{URL::to('shoporder/checkorder')}}/{{$vo['orderId']}}/{{$status}}" >查看订单</a>
+			@elseif($vo["status"]==2)<!--待发货 -->
+                            	<a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看订单</a>
+			@elseif($vo["status"]==3)<!-- 待收货 -->
+                            	<a href="{:U('order/confirmOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" id="order118_action_confirm" >确认收货</a>
+                            	<a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看订单</a>
+			@else
+				<a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看订单</a>
+			@endif
                         </div>
                     </div>
             </div>
             @endforeach
-            <else/>
-           `<div class="order_form member_no_records">
+	@else
+            <div class="order_form member_no_records">
                 <span>没有符合条件的记录</span>
             </div>
-            </notempty>
-        
+       @endif 
             
             <div class="order_form_page">
                 <div class="page">

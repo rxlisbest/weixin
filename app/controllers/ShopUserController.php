@@ -2,9 +2,9 @@
 
 class ShopUserController extends ShopUserBaseController {
 
-    public function getIndex() {
-    	//return 111;
-    	$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
+	public function getIndex() {
+		//return 111;
+		$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
 		$item_order = new ShopItemOrder();
 		$order_detail = new ShopOrderDetail();
 		if(!isset($_GET['status'])){
@@ -19,14 +19,14 @@ class ShopUserController extends ShopUserBaseController {
 		$orders = array();
 		foreach ($item_orders as  $key=>$value)
 		{	
-			
+
 			//var_dump($key);exit;
 			$order_details = $order_detail->whereRaw('orderId = ?', array($value->orderId))->get() ?: array();
 			foreach ($order_details as $val){
-				 $items = array('title'=>$val->title,'img'=>$val->img,'price'=>$val->price,'quantity'=>$val->quantity,'itemId'=>$val->itemId);
-				 $orders[$key]['items'][]=$items;
+				$items = array('title'=>$val->title,'img'=>$val->img,'price'=>$val->price,'quantity'=>$val->quantity,'itemId'=>$val->itemId);
+				$orders[$key]['items'][]=$items;
 
-			//var_dump($item_orders);exit;
+				//var_dump($item_orders);exit;
 			}
 
 			$content = array('order_sumPrice','orderId','add_time');
@@ -36,7 +36,28 @@ class ShopUserController extends ShopUserBaseController {
 		}  
 
 		//var_dump($item_orders);
-		return View::make('shop.default.User.index')->with(array('item_orders'=>$orders,'index_cate_list'=>$index_cate_list));
+		return View::make('shop.default.User.index')->with(array('status'=>1,'item_orders'=>$orders,'index_cate_list'=>$index_cate_list));
 		//return $orders;
-    }
+	}
+	/**
+	 * 收货地址
+	 */
+	public function getAddress($id=0) {
+		$user_address_mod = new ShopAddress();
+		$data = array();
+		if ($id) {
+			$info = $user_address_mod->find($id);
+			$data['info'] = $info;
+		}
+
+		$address_list = $user_address_mod->where('uid', '=', 1)->get();
+		$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
+		$data["address_list"] = $address_list;
+		$data["index_cate_list"] = $index_cate_list;
+		return View::make('shop.default.User.address')->with($data);
+	}
+	
+	public function postAddress(){
+
+	}
 }

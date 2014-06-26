@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<include file="public:headtop" />
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/dialog.js" id="dialog_js"></script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.ui.js" ></script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.validate.js" ></script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/mlselection.js" ></script>
-<link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery.ui.css" /></head>
+@include('shop/default/public/headtop')
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/dialog.js" id="dialog_js"></script>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/jquery.ui.js" ></script>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/jquery.validate.js" ></script>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/mlselection.js" ></script>
+<link rel="stylesheet" type="text/css" href="/statics/shop/default/css/jquery.ui.css" /></head>
 
 <body>
-<include file="public:head" />
+@include('shop/default/public/head')
 <div id="content">
     <div class="wrap">
         <div class="eject_btn" title="新增地址"><a class="enter" href="{:U('user/addaddress')}">新增地址</a></div> 
@@ -21,17 +21,17 @@
         </ul>
         ------>
         <ul class="address_list">
-        <volist name='address_list' id='vo' >
+	@foreach($address_list as $vo)
             <li>
-                <p>{$vo.consignee}({$vo.mobile})</p>
-                <p>{$vo.sheng}&nbsp;{$vo.shi}&nbsp;{$vo.qu}&nbsp;{$vo.address}</p>
+                <p>{{$vo->consignee}}({{$vo->mobile}})</p>
+                <p>{{$vo->sheng}}&nbsp;{{$vo->shi}}&nbsp;{{$vo->qu}}&nbsp;{{$vo->address}}</p>
                 <p class="new_line"><br /></p>
                 <p class="address_action">
-                    <span class="edit"><a href="{:U('User/edit_address',array('id'=>$vo['id']))}"><i class="edit_icon"></i>编辑</a></span>
-                    <span><a href="{:U('User/address',array('id'=>$vo['id'],'type'=>'del'))}" class="delete float_none"><i class="delete_icon"></i>删除</a></span>
+                    <span class="edit"><a href="{:U('User/edit_address',array('id'=>$vo->'id']))}"><i class="edit_icon"></i>编辑</a></span>
+                    <span><a href="{:U('User/address',array('id'=>$vo->'id'],'type'=>'del'))}" class="delete float_none"><i class="delete_icon"></i>删除</a></span>
                 </p>
             </li>
-          </volist>
+	@endforeach
         </ul>
         <div class="public table" style="display:none;">
             <table class="table_head_line">
@@ -56,6 +56,6 @@
         <div class="wrap_bottom"></div>
     </div>
 </div>
-<include file="public:footer" />
+@include('shop/default/public/footer')
 </body>
 </html>
