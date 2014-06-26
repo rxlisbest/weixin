@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head><include file="public:headtop" />
+@include('shop/default/public/headtop')
 </head>
 
 <body>
-<include file="public:head" />
+@include('shop/default/public/head')
 <div id="content">
 	<div id="warning"></div>
-    <form method="post" action="{:U('Order/closeOrder')}" >
+    <form method="post" action="{{URL::to('shoporder/closeorder')}}/{{$orderId}}" >
   
         <div class="order_cancel_box">
             <h1>您是否确定要取消以下订单？</h1>
-            <p>订单号:<span>{$orderId}</span></p>
+            <p>订单号:<span>{{$orderId}}</span></p>
             <dl>
                 <dt>取消原因:</dt>
                 <dd>
@@ -31,6 +31,6 @@
           <input type="hidden" name="orderId" value="{$orderId}" >
         </form>
 </div>
-<include file="public:footer" />
+@include('shop/default/public/footer')
 </body>
 </html>

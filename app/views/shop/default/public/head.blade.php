@@ -15,7 +15,7 @@
             	</ul>
         </li>
         <li class="r active" id="n_1"><a href="{{URL::to('shopindex/index')}}"><span></span></a></li>
-        <li class="r" id="n_2"><a href="{{URL::to('User/index')}}"><span></span></a></li>
+        <li class="r" id="n_2"><a href="{{URL::to('shopuser/index')}}"><span></span></a></li>
         <li class="r" id="n_3"><a href="{{URL::to('shopcart/index')}}"><span></span></a><i></i></li>
     </ul>
     <script type="text/javascript">

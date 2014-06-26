@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<include file="public:headtop" />
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/dialog.js" id="dialog_js"></script>
-<link href="__STATIC__/weixin/css/dialog.css" rel="stylesheet" type="text/css">
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery_003.js"></script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/zh-CN.js"></script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery_002.js"></script>
-<link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery.css">
+@include('shop/default/public/headtop')
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/dialog.js" id="dialog_js"></script>
+<link href="/statics/shop/default/css/dialog.css" rel="stylesheet" type="text/css">
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/jquery_003.js"></script>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/zh-CN.js"></script>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/jquery_002.js"></script>
+<link rel="stylesheet" type="text/css" href="/statics/shop/default/css/jquery.css">
 </head>
 
 <body>
-<include file="public:head" />
+@include('shop/default/public/head')
 <div class="content">
     <h3 class="membertop">
        <p class="my_name"><a href="#">  {$visitor.username}</a></p>
@@ -26,7 +26,7 @@
 	<script type="text/javascript">
     $(function(){
     $(".buyer_stat > li a").each(function() {
-                href="http://store.weiapps.cn/"+$(this).attr("href");
+                href=$(this).attr("href");
                 if(window.location.href==href){
                     $(this).parent("li").addClass("active");
                 }
@@ -37,29 +37,29 @@
         <div class="public">
         
             <notempty name="item_orders">
-             <volist name='item_orders' id='vo' >
+            @foreach($item_orders AS $vo)
             <div class="order_form">
-                    <p class="num">订单号: {$vo.orderId}</p>
-                    <volist name='vo.items' id='item' >
+                    <p class="num">订单号: {{$vo["orderId"]}}</p>
+                    @foreach($vo["items"] AS $item)
                     <div class="con">
                         <p class="ware_pic"><a href="{:U('Item/index',array('id'=>$item['itemId']))}" ><img src="{:attach(get_thumb($item['img'], '_b'), 'item')}" height="80" width="80"></a></p>
-                        <p class="ware_text"><a href="{:U('Item/index',array('id'=>$item['itemId']))}">{$item.title}</a><br><span class="attr"></span></p>
-                        <p class="price">价格: <span>¥{$item.price}</span></p>
-                        <p class="amount">数量: <span>{$item.quantity}</span></p>
+                        <p class="ware_text"><a href="{:U('Item/index',array('id'=>$item['itemId']))}">{{$item["title"]}}</a><br><span class="attr"></span></p>
+                        <p class="price">价格: <span>¥{{$item["price"]}}</span></p>
+                        <p class="amount">数量: <span>{{$item["quantity"]}}</span></p>
                     </div>
-                  </volist>
+                    @endforeach
                     <div class="clear"></div>
                     <div class="foot">
-                        <p class="time">添加时间:{$vo.add_time|date='Y-m-d H:i:s',###}</p>
+                        <p class="time">添加时间:{{date("Y-m-d",strtotime($vo["add_time"]))}}</p>
                          <div class="handle">
                             <div style="float:left;">
-                                订单总价: <b id="order118_order_amount">¥{$vo.order_sumPrice}&nbsp;&nbsp;</b>
+                                订单总价: <b id="order118_order_amount">¥{{$vo["order_sumPrice"]}}&nbsp;&nbsp;</b>
                             </div>   
                          <switch name="vo.status" >
                          <case value="1"><!--待付款 -->
                            <a href="{:U('order/pay',array('orderId'=>$vo['orderId']))}" id="order118_action_pay" class="btn">付款</a>
                           
-                            <a href="{:U('order/cancelOrder',array('orderId'=>$vo['orderId']))}" id="order118_action_cancel"> 取消订单</a>
+                            <a href="{{URL::to('shoporder/cancelorder')}}/{{$vo['orderId']}}" id="order118_action_cancel"> 取消订单</a>
                             <a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看订单</a>
                          </case>
                          <case value="2"><!--待发货 -->
@@ -75,12 +75,12 @@
                         </div>
                     </div>
             </div>
-            </volist>
+            @endforeach
             <else/>
-           <div class="order_form member_no_records">
+           `<div class="order_form member_no_records">
                 <span>没有符合条件的记录</span>
             </div>
-              </notempty>
+            </notempty>
         
             
             <div class="order_form_page">
@@ -104,7 +104,7 @@
         </div>
     <div class="clear"></div>
 </div>
-<include file="public:footer" />
+@include('shop/default/public/footer')
 
 </body>
 </html>
