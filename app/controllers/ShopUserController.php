@@ -1,18 +1,15 @@
 <?php
 
-class ShopUserController extends ShopUserBaseController {
+class ShopUserController extends \BaseController {
 
-	public function getIndex() {
+	public function getIndex($status=1) {
 		//return 111;
-		$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
+		//Session::put('a',11);
+		var_dump(Session::get('user_info'));exit;
+		$index_cate_list = ItemClass::where('status', '=', $status)->get() ?: array();
+		$data["index_cate_list"] = $index_cate_list;
 		$item_order = new ShopItemOrder();
 		$order_detail = new ShopOrderDetail();
-		if(!isset($_GET['status'])){
-			$status = 1;
-		}
-		else{
-			$status = $_GET['status'];
-		}
 
 		$item_orders = $item_order->OrderBy('id', 'desc')->WhereRaw('status=? and userId=?',array($status, 1))->get() ?: array();
 		//var_dump($item_orders);exit;
@@ -29,16 +26,31 @@ class ShopUserController extends ShopUserBaseController {
 				//var_dump($item_orders);exit;
 			}
 
-			$content = array('order_sumPrice','orderId','add_time');
+			$content = array('status','order_sumPrice','orderId','add_time');
 			foreach ($content as $v) {
 				$orders[$key][$v] = $value->{$v};
 			}
 		}  
-
+ 
+		$data["status"] = $status;
+		$data["item_orders"] = $orders;
 		//var_dump($item_orders);
-		return View::make('shop.default.User.index')->with(array('status'=>1,'item_orders'=>$orders,'index_cate_list'=>$index_cate_list));
+		return View::make('shop.default.User.index')->with($data);
 		//return $orders;
 	}
+
+	public function getLogin() {
+		$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
+		$data["index_cate_list"] = $index_cate_list;
+    	return View::make('shop.default.User.login')->with($data);
+    }
+
+    public function getRegister() {
+		$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
+		$data["index_cate_list"] = $index_cate_list;
+    	return View::make('shop.default.User.register')->with($data);
+    }
+
 	/**
 	 * 收货地址
 	 */
@@ -60,4 +72,62 @@ class ShopUserController extends ShopUserBaseController {
 	public function postAddress(){
 
 	}
+
+	public function getAddaddress()
+    {
+    	$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
+		$data["index_cate_list"] = $index_cate_list;
+    	return View::make('shop.default.User.addaddress')->with($data);
+    }
+
+    public function postAddaddress(){
+    	$user_address = new ShopAddress();
+	    
+    	$user_address->consignee = Input::get("consignee");
+    	$user_address->sheng = Input::get("sheng");
+    	$user_address->shi = Input::get("shi");
+    	$user_address->qu = Input::get("qu");
+    	$user_address->address = Input::get("address");
+    	$user_address->mobile = Input::get("phone_mob");
+
+    	$user_address->uid = 1;
+	
+        if($user_address->save()!==false){
+       		return Redirect::to('shopuser/address');
+        }
+    }
+
+    public function getEditaddress($id=0)
+    {
+    	$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
+		$data["index_cate_list"] = $index_cate_list;
+
+		$user_address = new ShopAddress();
+		$data["user_address"] = $user_address->find($id);
+		return View::make('shop.default.User.editaddress')->with($data);
+    }
+
+    public function postEditaddress($id=0){
+	    $user_address = ShopAddress::find($id);
+    	$user_address->consignee = Input::get("consignee");
+    	$user_address->sheng = Input::get("sheng");
+    	$user_address->shi = Input::get("shi");
+    	$user_address->qu = Input::get("qu");
+    	$user_address->address = Input::get("address");
+    	$user_address->mobile = Input::get("phone_mob");
+
+    	$user_address->uid = 1;
+	
+        if($user_address->save()!==false){
+       		return Redirect::to('shopuser/address');
+        }
+    }
+
+    public function getDeladdress($id=0)
+    {
+		$user_address = ShopAddress::find($id);
+		if($user_address->delete()!==false){
+       		return Redirect::to('shopuser/address');
+        }
+    }
 }

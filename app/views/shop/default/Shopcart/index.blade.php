@@ -37,7 +37,7 @@ $(function(){
           <div class="cart_pic"></div>
           <h4>您还没有宝贝，赶快去逛逛吧！</h4>
           <p>
-              <a class="enter" href="{:U('Index/index')}">马上去逛逛</a>
+              <a class="enter" href="{{URL::to('shopindex/index')}}">马上去逛逛</a>
           </p>
       </div>  
     @else 

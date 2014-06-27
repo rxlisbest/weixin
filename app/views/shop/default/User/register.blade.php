@@ -4,11 +4,11 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户注册 - {$page_seo.title}</title>
-<link href="__STATIC__/weixin/css/shop.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="__STATIC__/weixin/js/index.js"></script>
-<script type="text/javascript" src="__STATIC__/weixin/js/jquery.js" charset="utf-8"></script>
-<script type="text/javascript" src="__STATIC__/weixin/js/ecmall.js" charset="utf-8"></script>
-<script type="text/javascript" src="__STATIC__/weixin/js/touchslider.js" charset="utf-8"></script>
+<link href="/statics/shop/default/css/shop.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/statics/shop/default/js/index.js"></script>
+<script type="text/javascript" src="/statics/shop/default/js/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="/statics/shop/default/js/ecmall.js" charset="utf-8"></script>
+<script type="text/javascript" src="/statics/shop/default/js/touchslider.js" charset="utf-8"></script>
 <script type="text/javascript">
 //<!CDATA[
 var SITE_URL = "http://store.weiapps.cn";
@@ -25,11 +25,11 @@ $(function(){
 });
 //]]>
 </script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery_002.js"></script>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/jquery_002.js"></script>
 </head>
 
 <body>
-<include file="public:head" />
+@include('shop/default/public/head')
 <script type="text/javascript">
 //注册表单验证
 $(function(){
@@ -60,7 +60,7 @@ $(function(){
                 required : true,
                 byteRange: [3,15,'utf-8'],
                 remote   : {
-                    url :'index.php?m=Index&a=ajaxRegister',
+                    url :'{{URL::to('shopindex/ajaxregister')}}',
                     type:'post',
                     dataType:"json",  
                     data:{
@@ -116,7 +116,7 @@ $(function(){
 </script>
 
 <div id="content">
-    <form name="" id="register_form" method="post" action="{:U('User/register')}">
+    <form name="" id="register_form" method="post" action="{{URL::to('shopuser/register')}}">
         <input id="user_name" name="user_name" placeholder="用户名" class="text width10" type="text">
         <label id="checking_user" class="checking"></label>
         <input id="password" name="password" placeholder="密&nbsp;&nbsp;&nbsp;码" class="text width10" type="password">
@@ -127,6 +127,6 @@ $(function(){
     </form>
 </div>
 
-<include file="public:footer" />
+@include('shop/default/public/footer')
 </body>
 </html>

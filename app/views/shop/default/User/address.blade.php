@@ -12,7 +12,7 @@
 @include('shop/default/public/head')
 <div id="content">
     <div class="wrap">
-        <div class="eject_btn" title="新增地址"><a class="enter" href="{:U('user/addaddress')}">新增地址</a></div> 
+        <div class="eject_btn" title="新增地址"><a class="enter" href="{{URL::to("shopuser/addaddress")}}">新增地址</a></div> 
         <!-----------
         <ul class="address_list">
             <li class="no_address">
@@ -27,8 +27,8 @@
                 <p>{{$vo->sheng}}&nbsp;{{$vo->shi}}&nbsp;{{$vo->qu}}&nbsp;{{$vo->address}}</p>
                 <p class="new_line"><br /></p>
                 <p class="address_action">
-                    <span class="edit"><a href="{:U('User/edit_address',array('id'=>$vo->'id']))}"><i class="edit_icon"></i>编辑</a></span>
-                    <span><a href="{:U('User/address',array('id'=>$vo->'id'],'type'=>'del'))}" class="delete float_none"><i class="delete_icon"></i>删除</a></span>
+                    <span class="edit"><a href="{{URL::to("shopuser/editaddress")}}/{{$vo->id}}"><i class="edit_icon"></i>编辑</a></span>
+                    <span><a href="{{URL::to("shopuser/deladdress")}}/{{$vo->id}}" class="delete float_none"><i class="delete_icon"></i>删除</a></span>
                 </p>
             </li>
 	@endforeach

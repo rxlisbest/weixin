@@ -4,18 +4,18 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <title>会员中心 - 我的地址</title>
-<link href="__STATIC__/weixin/css/shop.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="__STATIC__/weixin/js/jquery.js" charset="utf-8"></script>
-<script type="text/javascript" src="__STATIC__/weixin/js/ecmall.js" charset="utf-8"></script>
-<script type="text/javascript" src="__STATIC__/weixin/js/touchslider.dev.js" charset="utf-8"></script>
+<link href="/statics/shop/default/css/shop.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/statics/shop/default/js/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="/statics/shop/default/js/ecmall.js" charset="utf-8"></script>
+<script type="text/javascript" src="/statics/shop/default/js/touchslider.dev.js" charset="utf-8"></script>
 
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/dialog.js" id="dialog_js"></script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.ui.js" ></script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.validate.js" ></script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/mlselection.js" ></script>
-<script type="text/javascript" language="javascript" src='__STATIC__/weixin/js/dizhi2.js'></script>
-<script type="text/javascript" language="javascript" src='__STATIC__/weixin/js/diqu2.js'></script>
-<link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery.ui.css" /></head>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/dialog.js" id="dialog_js"></script>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/jquery.ui.js" ></script>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/jquery.validate.js" ></script>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/mlselection.js" ></script>
+<script type="text/javascript" language="javascript" src='/statics/shop/default/js/dizhi2.js'></script>
+<script type="text/javascript" language="javascript" src='/statics/shop/default/js/diqu2.js'></script>
+<link rel="stylesheet" type="text/css" href="/statics/shop/default/css/jquery.ui.css" /></head>
 
 
 
@@ -27,8 +27,8 @@
 
 
 <body onLoad="setup()">
-<include file="public:head" />
-<script type="text/javascript" src="__STATIC__/weixin/js/jquery_002.js" charset="utf-8"></script>
+@include('shop/default/public/head')
+<script type="text/javascript" src="/statics/shop/default/js/jquery_002.js" charset="utf-8"></script>
 <script type="text/javascript">
 //<!CDATA[
 $(function(){
@@ -103,7 +103,7 @@ function hide_error(){
     <div class="add">
     
         <div id="warning"></div>
-        <form method="post" action="{:U('User/addaddress')}" id="address_form">
+        <form method="post" action="{{URL::to('shopuser/addaddress')}}" id="address_form">
             <ul class="form_address">
                 <li>
                     <!-- <h3>收货人姓名: </h3> -->
@@ -145,7 +145,7 @@ function hide_error(){
     </div>
      
 </div>
-<include file="public:footer" />
+@include('shop/default/public/footer')
 
 </body></html>
 

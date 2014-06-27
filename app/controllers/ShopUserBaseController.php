@@ -3,13 +3,6 @@
 class ShopUserBaseController extends \BaseController {
 
     public function  __construct(){
-        //parent::_initialize();
-        //访问者控制
-        /*if (!$this->visitor->is_login && !in_array(Request::segment(2), array('login', 'register', 'binding', 'ajax_check'))) {
-            IS_AJAX && $this->ajaxReturn(0, L('login_please'));
-            $this->redirect('user/login');
-        }*/
-        //$this->_curr_menu(Request::segment(2));
     }
 
     protected function _curr_menu($menu = 'index') {

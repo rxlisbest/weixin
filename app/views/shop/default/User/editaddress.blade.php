@@ -4,18 +4,18 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <title>会员中心 - 我的地址</title>
-<link href="__STATIC__/weixin/css/shop.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="__STATIC__/weixin/js/jquery.js" charset="utf-8"></script>
-<script type="text/javascript" src="__STATIC__/weixin/js/ecmall.js" charset="utf-8"></script>
-<script type="text/javascript" src="__STATIC__/weixin/js/touchslider.dev.js" charset="utf-8"></script>
+<link href="/statics/shop/default/css/shop.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/statics/shop/default/js/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="/statics/shop/default/js/ecmall.js" charset="utf-8"></script>
+<script type="text/javascript" src="/statics/shop/default/js/touchslider.dev.js" charset="utf-8"></script>
 
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/dialog.js" id="dialog_js"></script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.ui.js" ></script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.validate.js" ></script>
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/mlselection.js" ></script>
-<script type="text/javascript" language="javascript" src='__STATIC__/weixin/js/dizhi2.js'></script>
-<script type="text/javascript" language="javascript" src='__STATIC__/weixin/js/diqu2.js'></script>
-<link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery.ui.css" /></head>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/dialog.js" id="dialog_js"></script>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/jquery.ui.js" ></script>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/jquery.validate.js" ></script>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/mlselection.js" ></script>
+<script type="text/javascript" language="javascript" src='/statics/shop/default/js/dizhi2.js'></script>
+<script type="text/javascript" language="javascript" src='/statics/shop/default/js/diqu2.js'></script>
+<link rel="stylesheet" type="text/css" href="/statics/shop/default/css/jquery.ui.css" /></head>
 
 
 
@@ -26,8 +26,8 @@
 
 
 <body onLoad="setup()">
-<include file="public:head" />
-<script type="text/javascript" src="__STATIC__/weixin/js/jquery_002.js" charset="utf-8"></script>
+@include('shop/default/public/head')
+<script type="text/javascript" src="/statics/shop/default/js/jquery_002.js" charset="utf-8"></script>
 <script type="text/javascript">
 //<!CDATA[
 $(function(){
@@ -102,12 +102,12 @@ function hide_error(){
     <div class="add">
     
         <div id="warning"></div>
-        <form method="post" action="{:U('User/address')}" id="address_form">
-        <input type="hidden" name="id" value="{$info.id}" />
+        <form method="post" action="{{URL::to('shopuser/editaddress')}}/{{$user_address->id}}" id="address_form">
+        <input type="hidden" name="id" value="{{$user_address->id}}" />
             <ul class="form_address">
                 <li>
                     <!-- <h3>收货人姓名: </h3> -->
-                    <input class="text width_normal" value="{$info.consignee}" name="consignee" placeholder="请填写您的真实姓名" type="text">
+                    <input class="text width_normal" value="{{$user_address->consignee}}" name="consignee" placeholder="请填写您的真实姓名" type="text">
                     <label class="field_message"><span class="field_notice"></span></label>
                 </li>
                 <li>
@@ -128,16 +128,16 @@ function hide_error(){
                 </li>
                 
                  	<script language="javascript">
-								new PCAS("sheng","shi","qu","{$info.sheng}","{$info.shi}","{$info.qu}");
+								new PCAS("sheng","shi","qu","{{$user_address->sheng}}","{{$user_address->shi}}","{{$user_address->qu}}");
 				</script>
                 
                 <li>
                     <!-- <h3>详细地址: </h3> -->
-                    <input value="{$info.address}" class="text width_normal" name="address" placeholder="不必重复填写地区" type="text"><label class="field_message"><span class="field_notice"></span></label>
+                    <input value="{{$user_address->address}}" class="text width_normal" name="address" placeholder="不必重复填写地区" type="text"><label class="field_message"><span class="field_notice"></span></label>
                 </li>
                 <li>
                     <!-- <h3>手机号码:</h3> -->
-                    <input value="{$info.mobile}" class="text width_normal" name="phone_mob" placeholder="电话号码" type="text"><label class="field_message"><span class="field_notice"></span></label>
+                    <input value="{{$user_address->mobile}}" class="text width_normal" name="phone_mob" placeholder="电话号码" type="text"><label class="field_message"><span class="field_notice"></span></label>
                 </li>
             </ul>
             <div class="submit">
@@ -147,7 +147,7 @@ function hide_error(){
     </div>
      
 </div>
-<include file="public:footer" />
+@include('shop/default/public/footer')
 
 </body></html>
 

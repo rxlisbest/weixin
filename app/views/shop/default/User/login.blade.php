@@ -4,16 +4,16 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户登入-{$page_seo.title}</title>
-<link href="__STATIC__/weixin/css/shop.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="__STATIC__/weixin/js/index.js"></script>
-<script type="text/javascript" src="__STATIC__/weixin/js/jquery.js" charset="utf-8"></script>
-<script type="text/javascript" src="__STATIC__/weixin/js/ecmall.js" charset="utf-8"></script>
-<script type="text/javascript" src="__STATIC__/weixin/js/touchslider.js" charset="utf-8"></script>
+<link href="/statics/shop/default/css/shop.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/statics/shop/default/js/index.js"></script>
+<script type="text/javascript" src="/statics/shop/default/js/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="/statics/shop/default/js/ecmall.js" charset="utf-8"></script>
+<script type="text/javascript" src="/statics/shop/default/js/touchslider.js" charset="utf-8"></script>
 
-<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery_002.js"></script></head>
+<script charset="utf-8" type="text/javascript" src="/statics/shop/default/js/jquery_002.js"></script></head>
 
 <body>
-<include file="public:head" />
+@include('shop/default/public/head')
 
 <script type="text/javascript">
 $(function(){	
@@ -59,12 +59,12 @@ $(function(){
     	var user_name= $('#user_name').val();
     	 var password= $('#password').val();
     	
-    	var url  = "{:U('Index/ajaxlogin')}";
+    	var url  = "{{URL::to('shopindex/ajaxlogin')}}";
     	$.post(url,{user_name:user_name,password:password},function(data){
     	
     		if(data.status==1) {
     			$('#login_text').html("<b>登陆成功！</b>");
-    			function a(){location.href=decodeURIComponent("%2Findex.php%3Fapp%3Dmemberbuy%26store_id%3D9");}
+    			function a(){location.href="/shopuser/index";}
     			setTimeout(a,2000);
     		} else {
     			//var jsonObj = eval('('+result+')');
@@ -108,11 +108,11 @@ $(function(){
            <!-- <input name="ret_url" value=" " type="hidden">-->
     </form>
     <div class="login_right">
-        <h4>如果您还不是会员，请<a href="{:U('user/register')}" title="立即注册">立即注册</a></h4>
+        <h4>如果您还不是会员，请<a href="{{URL::to('shopuser/register')}}" title="立即注册">立即注册</a></h4>
     </div>
 </div>
 
-<include file="public:footer" />
+@include('shop/default/public/footer')
 
 </body>
 </html>

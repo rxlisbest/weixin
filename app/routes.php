@@ -25,6 +25,11 @@ Route::controller('shopcart','ShopCartController');
 Route::controller('shopuser','ShopUserController');
 Route::controller('shoporder','ShopOrderController');
 
+Route::group(array('before' => 'shopauth'), function()
+{
+    //Route::controller('shopuser','ShopUserController');
+	
+});
 
 Route::controller('item','ItemController');
 Route::controller('itemclass','ItemclassController');
@@ -34,7 +39,16 @@ Route::get('test',function(){
 	/*$cart = new Cart();
 	$cart->test(1);*/
 	//Session::forget('cart');
-	//return Session::get('cart')["124"];
-	$name = Request::segment(2);
+	//Session::put('user_info', 111);
+	return Session::get('user_info');
+	return $name;
+});
+
+Route::get('test1',function(){
+	/*$cart = new Cart();
+	$cart->test(1);*/
+	//Session::forget('cart');
+	Session::put('user_info', 222);
+	return Session::get('user_info');
 	return $name;
 });

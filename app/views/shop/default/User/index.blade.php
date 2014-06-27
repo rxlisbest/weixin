@@ -15,13 +15,29 @@
 <div class="content">
     <h3 class="membertop">
        <p class="my_name"><a href="#">  {$visitor.username}</a></p>
-       <p class="my_address"><a href="{:U('user/address')}">收货地址管理</a></p>
+       <p class="my_address"><a href="{{URL::to('shopuser/address')}}">收货地址管理</a></p>
     </h3>
     <ul class="buyer_stat">
-          <li class="btn_1 <if condition='$status eq 1'>active</if> "><a href="{:U('User/index',array('status'=>1))}">待付款</a><span>待付款</span></li>        
-          <li class="btn_2 <if condition='$status eq 2'>active</if> "><a href="{:U('User/index',array('status'=>2))}">待发货</a><span>待发货</span></li>
-          <li class="btn_3 <if condition='$status eq 3'>active</if>"><a href="{:U('User/index',array('status'=>3))}">待收货</a><span>待收货</span></li>
-          <li class="btn_4 <if condition='$status eq 4'>active</if>"><a href="{:U('User/index',array('status'=>4))}">已完成</a><span>已完成</span></li>
+            <li class="btn_1 
+            @if($status==1)
+            active
+            @endif
+            "><a href="{{URL::to("shopuser/index")}}/1">待付款</a><span>待付款</span></li>        
+            <li class="btn_2 
+            @if($status==2)
+            active
+            @endif
+            "><a href="{{URL::to("shopuser/index")}}/2">待发货</a><span>待发货</span></li>
+            <li class="btn_3 
+            @if($status==3)
+            active
+            @endif
+             "><a href="{{URL::to("shopuser/index")}}/3">待收货</a><span>待收货</span></li>
+            <li class="btn_4 
+            @if($status==4)
+            active
+            @endif
+            "><a href="{{URL::to("shopuser/index")}}/4">已完成</a><span>已完成</span></li>
     </ul>
 	<script type="text/javascript">
     $(function(){

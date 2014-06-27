@@ -13,7 +13,6 @@ class ShopOrderController extends ShopUserBaseController {
 
 		//$orderId = Input::get("orderId");
 		$cancel_reason = Input::get("cancel_reason");
-		$item = new ShopItem();
 		$order_detail = new ShopOrderDetail();
 		$order = ShopItemOrder::WhereRaw('orderId = ? and userId = ?', array($orderId, 1))->first();
 		//var_dump($order);exit;
@@ -28,12 +27,14 @@ class ShopOrderController extends ShopUserBaseController {
 			if($item_order->save()){//设置为关闭
 				$order_details = $order_detail->where('orderId', '=', $orderId)->get();
 
+				/*购物车的数量加回到库存数量*/
 				foreach ($order_details as $val){
-					$detail = $item->find();
-					$detail->goods_stock += $val['quantity'];
-					$detail->save();
+					$item = ShopItem::find($val->itemId);
+					//var_dump($val->itemId);exit;
+					$item->goods_stock += $val->quantity;
+					$item->save();
 				}
-				$this->redirect('shopuser/index');
+				return Redirect::to('shopuser/index');
 			}
 			else{
 				echo '关闭订单失败!';
