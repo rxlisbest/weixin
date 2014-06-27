@@ -22,12 +22,12 @@ Route::controller('shopindex','ShopIndexController');
 Route::controller('shopitem','ShopItemController');
 Route::controller('shopbook','ShopBookController');
 Route::controller('shopcart','ShopCartController');
-Route::controller('shopuser','ShopUserController');
-Route::controller('shoporder','ShopOrderController');
+//Route::controller('shopuser','ShopUserController');
 
 Route::group(array('before' => 'shopauth'), function()
 {
-    //Route::controller('shopuser','ShopUserController');
+    Route::controller('shopuser','ShopUserController');
+    Route::controller('shoporder','ShopOrderController');
 	
 });
 
@@ -40,7 +40,7 @@ Route::get('test',function(){
 	$cart->test(1);*/
 	//Session::forget('cart');
 	//Session::put('user_info', 111);
-	return Session::get('user_info');
+	return Session::all();
 	return $name;
 });
 

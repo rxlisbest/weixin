@@ -4,6 +4,6 @@
     </p>
     <div style="height:40px; background:#fff; padding:0; overflow:hidden;">
         <div style="float:left; margin:5px 10px 0 0; display:inline;"><img height="20" src="/statics/shop/default/weixin/images/logo.png"></div>
-        <div style="line-height:40px; height:40px; display:inline-block; margin-left:10px; float:right; color:#aaa; font-size:14px;">杂货铺技术支持</div>
+        <div style="line-height:40px; height:40px; display:inline-block; margin-left:10px; float:right; color:#aaa; font-size:14px;">1024技术支持</div>
     </div>
 </div>

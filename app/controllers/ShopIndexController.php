@@ -40,7 +40,7 @@ class ShopIndexController extends \BaseController {
         }
 
         echo json_encode($data);
-        exit;
+        return ;
     }
 
     public function postAjaxregister(){

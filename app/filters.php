@@ -42,10 +42,10 @@ Route::filter('auth', function()
 Route::filter('shopauth', function()
 {	
 	//
-	var_dump(Session::get("user_info"));
+	//var_dump(Session::get("user_info"));
 	$uservisitor = new UserVisitor();
     if (!$uservisitor->is_login && !in_array(Request::segment(2), array('login', 'register'))) 
-		return Redirect::to('shopuser/login');
+	return Redirect::to('shopuser/login');
 });
 
 Route::filter('auth.basic', function()

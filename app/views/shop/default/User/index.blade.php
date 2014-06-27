@@ -76,12 +76,12 @@
 				<a href="{{URL::to('shoporder/cancelorder')}}/{{$vo['orderId']}}" id="order118_action_cancel"> 取消订单</a>
                          	<a href="{{URL::to('shoporder/checkorder')}}/{{$vo['orderId']}}/{{$status}}" >查看订单</a>
 			@elseif($vo["status"]==2)<!--待发货 -->
-                            	<a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看订单</a>
+                         	<a href="{{URL::to('shoporder/checkorder')}}/{{$vo['orderId']}}/{{$status}}" >查看订单</a>
 			@elseif($vo["status"]==3)<!-- 待收货 -->
-                            	<a href="{:U('order/confirmOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" id="order118_action_confirm" >确认收货</a>
-                            	<a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看订单</a>
+                            	<a href="{{URL::to('shoporder/confirmorder')}}/{{$vo['orderId']}}/{{$status}}" id="order118_action_confirm" >确认收货</a>
+                         	<a href="{{URL::to('shoporder/checkorder')}}/{{$vo['orderId']}}/{{$status}}" >查看订单</a>
 			@else
-				<a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看订单</a>
+                         	<a href="{{URL::to('shoporder/checkorder')}}/{{$vo['orderId']}}/{{$status}}" >查看订单</a>
 			@endif
                         </div>
                     </div>

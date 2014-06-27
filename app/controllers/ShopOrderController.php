@@ -27,7 +27,7 @@ class ShopOrderController extends ShopUserBaseController {
 			if($item_order->save()){//设置为关闭
 				$order_details = $order_detail->where('orderId', '=', $orderId)->get();
 
-				/*购物车的数量加回到库存数量*/
+
 				foreach ($order_details as $val){
 					$item = ShopItem::find($val->itemId);
 					//var_dump($val->itemId);exit;
@@ -63,5 +63,31 @@ class ShopOrderController extends ShopUserBaseController {
 
 		$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
 		return View::make('shop.default.Order.checkOrder')->with(array('item_detail'=>$item_detail,'order'=>$order,'index_cate_list'=>$index_cate_list));
+	}
+
+	public function getConfirmorder($orderId=0, $status=1)//确认收货
+	{
+		$item_order = ShopItemOrder::WhereRaw('orderId=? and userId=? and status=3', array($orderId, 1))->first();
+		if(!$item_order){
+			echo "222";
+		}
+		$item_order->status = 4;//收到货
+		if($item_order->save()){
+			$order_detail = new ShopOrderDetail();
+			$order_details = $order_detail->where('orderId', '=', $orderId)->get();
+			foreach ($order_details as $val)
+			{
+				$item = ShopItem::find($val->itemId);
+				//var_dump($val);var_dump($item);exit;
+				$item->buy_num += $val->quantity;
+				$item->save();
+			}
+			return Redirect::to('shopuser/index/'.$status);
+		}
+		else {
+			/*$this->error('确定收货失败');*/
+			echo "222";
+		}
+
 	}
 }
