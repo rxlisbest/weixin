@@ -11,6 +11,6 @@ class Item extends Eloquent{
 	public $timestamps = FALSE;
 
 	public function itemclass(){
-		return $this->belongsTo('Item', 'cate_id', 'id');
+		return $this->belongsTo('ItemClass', 'cate_id', 'id');
 	}
 }

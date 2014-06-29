@@ -102,7 +102,7 @@ function hide_error(){
     <div class="add">
     
         <div id="warning"></div>
-        <form method="post" action="{{URL::to('shopuser/editaddress')}}/{{$user_address->id}}" id="address_form">
+        <form method="post" action="{{URL::to($shopName.'/shopuser/editaddress')}}/{{$user_address->id}}" id="address_form">
         <input type="hidden" name="id" value="{{$user_address->id}}" />
             <ul class="form_address">
                 <li>

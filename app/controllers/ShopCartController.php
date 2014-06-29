@@ -1,14 +1,17 @@
 <?php
 
-class ShopCartController extends \BaseController {
+class ShopCartController extends \ShopBaseController {
 
 	public function getIndex(){
+		$data["shopName"] = $this->shopName;
 		$cart = new Cart();  
 		$items = Session::get('cart');
 		$sumPrice = $cart->getPrice();
 		//$this->_config_seo();
-		$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
-		return View::make('shop.default.Shopcart.index')->with(array('items'=>$items,'index_cate_list'=>$index_cate_list,'sumPrice'=>$sumPrice));
+		$data["items"] = $items;
+		$data["sumPrice"] = $sumPrice;
+		$data["item_class_list"] = $this->item_class_list;
+		return View::make('shop.default.Shopcart.index')->with($data);
 	}
 
 	public function postAddcart()

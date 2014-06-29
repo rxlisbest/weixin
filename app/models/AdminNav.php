@@ -1,6 +1,6 @@
 <?php
 
-class WeixinNav extends Eloquent{
+class AdminNav extends Eloquent{
 
 	/**
 	 * The database table used by the model.

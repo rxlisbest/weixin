@@ -7,10 +7,10 @@ class ItemClass extends Eloquent{
 	 *
 	 * @var string
 	 */
-	protected $table = 'weixin_item_cate';
+	protected $table = 'weixin_item_class';
 	public $timestamps = FALSE;
 	public function item()
-    {
-        return $this->hasMany('id');
-    }
+	{
+		return $this->hasMany('Item');
+	}
 }

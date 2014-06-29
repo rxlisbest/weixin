@@ -14,7 +14,7 @@
             <span class="btn btn-danger"></span>
         </div>
     </div><!-- #sidebar-shortcuts -->
-
+	{{$sidebar}}
     <ul class="nav nav-list">
         <li>
             <a href="{{ URL::to('setting') }}">

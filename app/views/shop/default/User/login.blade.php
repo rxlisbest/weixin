@@ -59,16 +59,16 @@ $(function(){
     	var user_name= $('#user_name').val();
     	 var password= $('#password').val();
     	
-    	var url  = "{{URL::to('shopindex/ajaxlogin')}}";
+    	var url  = "{{URL::to($shopName.'/shopindex/ajaxlogin')}}";
     	$.post(url,{user_name:user_name,password:password},function(data){
     	
     		if(data.status==1) {
     			$('#login_text').html("<b>登陆成功！</b>");
-    			function a(){location.href="/shopuser/index";}
+    			function a(){location.href="/{{$shopName}}/shopuser/index";}
     			setTimeout(a,2000);
     		} else {
     			//var jsonObj = eval('('+result+')');
-    			$('#login_text').html("<i>密码错误！</i>");
+    			$('#login_text').html("<i>用户名或密码错误！</i>");
     		}
 
     	},'json');
@@ -108,7 +108,7 @@ $(function(){
            <!-- <input name="ret_url" value=" " type="hidden">-->
     </form>
     <div class="login_right">
-        <h4>如果您还不是会员，请<a href="{{URL::to('shopuser/register')}}" title="立即注册">立即注册</a></h4>
+        <h4>如果您还不是会员，请<a href="{{URL::to($shopName.'/shopuser/register')}}" title="立即注册">立即注册</a></h4>
     </div>
 </div>
 

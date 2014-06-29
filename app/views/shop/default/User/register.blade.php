@@ -60,7 +60,7 @@ $(function(){
                 required : true,
                 byteRange: [3,15,'utf-8'],
                 remote   : {
-                    url :'{{URL::to('shopindex/ajaxregister')}}',
+                    url :'{{URL::to($shopName.'/shopindex/ajaxregister')}}',
                     type:'post',
                     dataType:"json",  
                     data:{
@@ -116,7 +116,7 @@ $(function(){
 </script>
 
 <div id="content">
-    <form name="" id="register_form" method="post" action="{{URL::to('shopuser/register')}}">
+    <form name="" id="register_form" method="post" action="{{URL::to($shopName.'/shopuser/register')}}">
         <input id="user_name" name="user_name" placeholder="用户名" class="text width10" type="text">
         <label id="checking_user" class="checking"></label>
         <input id="password" name="password" placeholder="密&nbsp;&nbsp;&nbsp;码" class="text width10" type="password">

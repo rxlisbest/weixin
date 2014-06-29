@@ -1,12 +1,14 @@
 <?php
 
-class ShopItemController extends \BaseController {
+class ShopItemController extends \ShopBaseController {
 
-    public function getDetail($id = 0)
-    {	
-        $item = Item::find($id);
-        $index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
-        //var_dump($items);
-        return View::make('shop.default.Item.index')->with(array('item'=>$item,'index_cate_list'=>$index_cate_list));
-    }
+	public function getDetail($shopName='roy',$id = 0)
+	{	
+		$data["shopName"] = $this->shopName;
+		$item = Item::find($id);
+		//var_dump($items);
+		$data["item"] = $item;
+		$data["item_class_list"] = $this->item_class_list;
+		return View::make('shop.default.Item.index')->with($data);
+	}
 }

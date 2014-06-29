@@ -103,7 +103,7 @@ function hide_error(){
     <div class="add">
     
         <div id="warning"></div>
-        <form method="post" action="{{URL::to('shopuser/addaddress')}}" id="address_form">
+        <form method="post" action="{{URL::to($shopName.'/shopuser/addaddress')}}" id="address_form">
             <ul class="form_address">
                 <li>
                     <!-- <h3>收货人姓名: </h3> -->

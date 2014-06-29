@@ -7,16 +7,16 @@
     	<li id="n_0">
     	<span ></span>
         	<ul class="submenu">
-		    @foreach($index_cate_list as $vo)
+		    @foreach($item_class_list as $vo)
 		    <li>
-			<a href="{{URL::to('shopbook/cate')}}/{{$vo->id}}" class="none_ico"> {{$vo->name}}</a>
+			<a href="{{URL::to($shopName.'/shopbook/cate')}}/{{$vo->id}}" class="none_ico"> {{$vo->name}}</a>
 		    </li>
 		    @endforeach
             	</ul>
         </li>
-        <li class="r active" id="n_1"><a href="{{URL::to('shopindex/index')}}"><span></span></a></li>
-        <li class="r" id="n_2"><a href="{{URL::to('shopuser/index')}}"><span></span></a></li>
-        <li class="r" id="n_3"><a href="{{URL::to('shopcart/index')}}"><span></span></a><i></i></li>
+        <li class="r active" id="n_1"><a href="{{URL::to($shopName.'/shopindex/index')}}"><span></span></a></li>
+        <li class="r" id="n_2"><a href="{{URL::to($shopName.'/shopuser/index')}}"><span></span></a></li>
+        <li class="r" id="n_3"><a href="{{URL::to($shopName.'/shopcart/index')}}"><span></span></a><i></i></li>
     </ul>
     <script type="text/javascript">
     	$(".navlist > li#n_0").click(function(){

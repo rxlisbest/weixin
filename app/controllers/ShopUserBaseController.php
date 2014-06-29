@@ -1,8 +1,11 @@
 <?php
 
-class ShopUserBaseController extends \BaseController {
-
+class ShopUserBaseController extends \ShopBaseController {
+	
+	
     public function  __construct(){
+	parent::__construct();
+	$this->userInfo= Session::get('user_info');
     }
 
     protected function _curr_menu($menu = 'index') {

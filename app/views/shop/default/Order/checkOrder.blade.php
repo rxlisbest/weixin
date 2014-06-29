@@ -147,7 +147,7 @@ $(function(){
         <div class="clear"></div>
         <if condition='$order.status eq 1' >
         <div class="btn_list">
-        	<a class="order_cancel" href="{{URL::to('shoporder/cancelorder')}}/{{$order->orderId}}" id="order118_action_cancel"> 取消订单</a>
+        	<a class="order_cancel" href="{{URL::to($shopName.'/shoporder/cancelorder')}}/{{$order->orderId}}" id="order118_action_cancel"> 取消订单</a>
 	        <a class="order_pay" href="{:U('order/pay',array('orderId'=>$order['orderId']))}" id="order118_action_pay">付款</a>
         </div>
         </if>

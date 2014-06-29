@@ -16,22 +16,61 @@ class UserVisitor {
 		// 非微信浏览器禁止浏览
 		echo "亲，只能在微信内访问...";exit;
 		}*/     
+	}
+
+	public function check($shopName=''){
 		if (Session::has('user_info')) {
 			//已经登陆
 			$user_info = Session::get('user_info');
-			$user = ShopUser::WhereRaw('username=? and password=?', array($user_info['username'], $user_info['password']))->first();
+			$shopId = User::where('username', '=', $shopName)->first()->id;
+			$user = ShopUser::WhereRaw('username=? and password=? and shopId=?', array($user_info['username'], $user_info['password'], $shopId))->first();
 			//$this->info = Session::push('user_info.id',id);
 			if($user)
 				$this->is_login = true;
 			else
 				$this->is_login = false;
-				
+
 		} 
 		else {
 			$this->is_login = false;
 		}
 	}
 
+	public function login_check($username='', $password='', $shopName=''){
+		$shopId = User::where('username', '=', $shopName)->first()->id;
+		$user = ShopUser::WhereRaw('username=? and password=? and shopId=?', array($username, md5($password), $shopId))->first();
+		//$this->info = Session::push('user_info.id',id);
+		if($user){
+			$user = $user->toArray();
+			Session::put("user_info", $user);
+			$cart = ShopCart::WhereRaw('userId=? and shopId=?', array($user["id"], $shopId))->get();
+			if($cart){
+				$cart = $cart->toArray();
+				$new_cart = array();
+				foreach($cart as $k=>$val){
+					$cart[$k]["id"] = $val["itemId"];
+					unset($cart[$k]["itemId"]);
+					$new_cart[$val["itemId"]] = $cart[$k];
+					unset($cart[$k]);
+				}
+				Session::put("cart", $new_cart);
+			}
+			return true;
+		}
+		else
+			return false;
+	}
+
+	public function register_check($username='', $shopName=''){
+		$shopId = User::where('username', '=', $shopName)->first()->id;
+		$user = ShopUser::WhereRaw('username=? and shopId=?', array($username, $shopId))->first();
+		//$this->info = Session::push('user_info.id',id);
+		if($user){
+			return true;
+		}
+		else
+			return false;
+	}
 	/**
 	 * 登陆会话
 	 */

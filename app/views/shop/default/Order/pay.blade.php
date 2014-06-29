@@ -4,10 +4,10 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <title>会员中心 - 查看订单</title>
-<link href="__STATIC__/weixin/css/shop.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="__STATIC__/weixin/js/jquery.js" charset="utf-8"></script>
-<script type="text/javascript" src="__STATIC__/weixin/js/ecmall.js" charset="utf-8"></script>
-<script type="text/javascript" src="__STATIC__/weixin/js/touchslider.dev.js" charset="utf-8"></script>
+<link href="/statics/shop/default/css/shop.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/statics/shop/default/js/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="/statics/shop/default/js/ecmall.js" charset="utf-8"></script>
+<script type="text/javascript" src="/statics/shop/default/js/touchslider.dev.js" charset="utf-8"></script>
 <script type="text/javascript">
 //<!CDATA[
 var SITE_URL = "http://store.weiapps.cn";
@@ -27,15 +27,15 @@ $(function(){
 </head>
 
 <body>
-<include file="public:head" />
+@include('shop/default/public/head')
 <div id="content">
-    <form action="{:U('Order/end')}" method="POST" id="goto_pay">
-    <input type="hidden" name="orderid" value="{$orderid}" />
-       <input type="hidden" name="dingdanhao" value="{$dingdanhao}" />
+    <form action="{{URL::to($shopName.'/shoporder/end')}}" method="POST" id="goto_pay">
+    <input type="hidden" name="orderid" value="{{$orderid}}" />
+       <input type="hidden" name="dingdanhao" value="{{$dingdanhao}}" />
         <div class="step_main">
             <div class="clue_on"><h4>订单提交成功！</h4><p>您的订单已成功生成，选择您想用的支付方式进行支付</p></div>
             <div class="order_information">
-                    <p>订单号<span>{$dingdanhao}</span></p>订单总价<span>¥{$order_sumPrice}</span>
+                    <p>订单号<span>{{$dingdanhao}}</span></p>订单总价<span>¥{{$order_sumPrice}}</span>
             </div>
 
             <div class="buy">
@@ -44,7 +44,7 @@ $(function(){
                         <dt>在线支付</dt>
                         <dd>
                             <p class="radio"><input checked='checked' id="payment_alipay" name="payment_id" value="1" type="radio"></p>
-                            <p class="logo"><label for="payment_alipay"><img src="__STATIC__/weixin/images/zhi.png" ></label></p>
+                            <p class="logo"><label for="payment_alipay"><img src="/statics/shop/default/images/zhi.png" ></label></p>
                             <p class="explain">欢迎使用支付宝</p>
                         </dd>
                     </dl>
@@ -52,7 +52,7 @@ $(function(){
                         <dt>线下支付</dt>
                         <dd>
                             <p class="radio"><input id="payment_cod" name="payment_id" value="2" type="radio"></p>
-                            <p class="logo"><label for="payment_cod"><img  src="__STATIC__/weixin/images/huodao.png"></label></p>
+                            <p class="logo"><label for="payment_cod"><img  src="/statics/shop/default/images/huodao.png"></label></p>
                             <p class="explain">欢迎使用货到付款</p>
                         </dd>
                     </dl>           
@@ -71,6 +71,6 @@ $(function(){
         </div>
     </form>
 </div>
-<include file="public:footer" />
+@include('shop/default/public/footer')
 </body>
 </html>

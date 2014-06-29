@@ -18,21 +18,21 @@ Route::group(array('before' => 'auth'), function()
 	
 });
 /*微信网站*/
-Route::controller('shopindex','ShopIndexController');
-Route::controller('shopitem','ShopItemController');
-Route::controller('shopbook','ShopBookController');
-Route::controller('shopcart','ShopCartController');
+Route::controller('{shopname}/shopindex','ShopIndexController');
+Route::controller('{shopname}/shopitem','ShopItemController');
+Route::controller('{shopname}/shopbook','ShopBookController');
+Route::controller('{shopname}/shopcart','ShopCartController');
 //Route::controller('shopuser','ShopUserController');
 
 Route::group(array('before' => 'shopauth'), function()
 {
-    Route::controller('shopuser','ShopUserController');
-    Route::controller('shoporder','ShopOrderController');
+    Route::controller('{shopname}/shopuser','ShopUserController');
+    Route::controller('{shopname}/shoporder','ShopOrderController');
 	
 });
-
-Route::controller('item','ItemController');
-Route::controller('itemclass','ItemclassController');
+/*后台*/
+Route::controller('item','AdminItemController');
+Route::controller('itemclass','AdminItemClassController');
 Route::controller('users','UsersController');
 
 Route::get('test',function(){

@@ -26,7 +26,7 @@
         <div class="navbar navbar-inverse">
           <div class="navbar-inner">
            <div class="container-fluid">
-              <a class="brand" href="#"><small><i class="icon-leaf"></i> Ace Admin</small> </a>
+              <a class="brand" href="#"><small><i class="icon-leaf"></i> 1024 Admin</small> </a>
               <ul class="nav ace-nav pull-right">
                     <li class="grey">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">

@@ -37,7 +37,7 @@ $(function(){
           <div class="cart_pic"></div>
           <h4>您还没有宝贝，赶快去逛逛吧！</h4>
           <p>
-              <a class="enter" href="{{URL::to('shopindex/index')}}">马上去逛逛</a>
+              <a class="enter" href="{{URL::to($shopName.'/shopindex/index')}}">马上去逛逛</a>
           </p>
       </div>  
     @else 
@@ -54,11 +54,11 @@ $(function(){
                     <span>数量:{{$vo['price']}}</span>
                     <span>
                         <img src="/statics/shop/default/images/subtract.gif" onClick="decrease_quantity({{$vo['id']}});" alt="decrease" style="vertical-align: middle;width=:16px">
-                        <input id="input_item_{{$vo['id']}}" value="{{$vo['num']}}" orig="1" changed="{{$vo['num']}}" onKeyUp="change_quantity({{$vo['id']}}, this);" class="text1 width3" type="text" style="height:20px;">
+                        <input id="input_item_{{$vo['id']}}" value="{{$vo['num']}}" orig="1" changed="{{$vo['num']}}" onKeyUp="change_quantity({{$vo['id']}}, this, '{{$shopName}}');" class="text1 width3" type="text" style="height:20px;">
                         <img src="/statics/shop/default/images/adding.gif" onClick="add_quantity({{$vo['id']}});" alt="increase" style="vertical-align: middle;width=:16px">
                     </span><br>
                     <span>
-                        <a class="del" href="javascript:;" onClick="drop_cart_item({{$vo['id']}});"> <img src="/statics/shop/default/images/del.png"  style="vertical-align: middle;height:20px;width=:20px"></a>
+                        <a class="del" href="javascript:;" onClick="drop_cart_item({{$vo['id']}}, '{{$shopName}}');"> <img src="/statics/shop/default/images/del.png"  style="vertical-align: middle;height:20px;width=:20px"></a>
                     </span>
                 </span>
             </p>
@@ -78,7 +78,7 @@ $(function(){
             <strong class="fontsize1" id="cart_amount">¥{{$sumPrice}}</strong>
         </p>
         <p class="jiesuan_btn">
-            <a href="{:U('order/jiesuan')}" class="btn"><span>去结算</span><img src="/statics/shop/default/images/jiesuan.png" width="50%"></a>
+            <a href="{{URL::to($shopName.'/shoporder/jiesuan')}}" class="btn"><span>去结算</span><img src="/statics/shop/default/images/jiesuan.png" width="50%"></a>
         </p>
     </div>
     @endif

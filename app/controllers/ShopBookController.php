@@ -1,12 +1,14 @@
 <?php
 
-class ShopBookController extends \BaseController {
+class ShopBookController extends \ShopBaseController {
 
-    public function getCate($cate_id=0)
-    {	
-        $items = Item::with('Itemclass')->where('cate_id', '=', $cate_id)->get() ?: array();
-        $index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
-        //var_dump($items);
-        return View::make('shop.default.book.cate')->with(array('items'=>$items,'index_cate_list'=>$index_cate_list));
-    }
+	public function getCate($shopName='roy',$cate_id=0)
+	{	
+		$data["shopName"] = $this->shopName;
+		$items = Item::with('Itemclass')->where('cate_id', '=', $cate_id)->get() ?: array();
+		//var_dump($items);
+		$data["item_class_list"] = $this->item_class_list;
+		$data["items"] = $items; 
+		return View::make('shop.default.book.cate')->with($data);
+	}
 }

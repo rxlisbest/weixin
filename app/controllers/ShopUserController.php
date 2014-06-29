@@ -1,15 +1,14 @@
 <?php
 
-class ShopUserController extends \BaseController {
+class ShopUserController extends \ShopUserBaseController {
 
-	public function getIndex($status=1) {
-		//return 111;
-		$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
-		$data["index_cate_list"] = $index_cate_list;
+	public function getIndex($shopName='roy', $status=1) {
+		$data["shopName"] = $this->shopName;
+		$data["item_class_list"] = $this->item_class_list;
 		$item_order = new ShopItemOrder();
 		$order_detail = new ShopOrderDetail();
 
-		$item_orders = $item_order->OrderBy('id', 'desc')->WhereRaw('status=? and userId=?',array($status, 1))->get() ?: array();
+		$item_orders = $item_order->OrderBy('id', 'desc')->WhereRaw('status=? and userId=?',array($status, $this->userInfo["id"]))->get() ?: array();
 		//var_dump($item_orders);exit;
 		$orders = array();
 		foreach ($item_orders as  $key=>$value)
@@ -38,32 +37,43 @@ class ShopUserController extends \BaseController {
 	}
 
 	public function getLogin() {
-		$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
-		$data["index_cate_list"] = $index_cate_list;
+		$data["shopName"] = $this->shopName;
+		$data["item_class_list"] = $this->item_class_list;
 		return View::make('shop.default.User.login')->with($data);
 	}
 
 	public function getRegister() {
-		$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
-		$data["index_cate_list"] = $index_cate_list;
+		$data["shopName"] = $this->shopName;
+		$data["item_class_list"] = $this->item_class_list;
 		return View::make('shop.default.User.register')->with($data);
+	}
+
+	public function postRegister() {
+		$user = new ShopUser();
+		$user->username = Input::get('user_name');
+		$user->email = Input::get('email');
+		$user->password = md5(Input::get('password'));
+		$user->shopId = $this->shopId;
+		$user->save();
+		return Redirect::to($this->shopName."/shopuser/login");
 	}
 
 	/**
 	 * 收货地址
 	 */
-	public function getAddress($id=0) {
-		$user_address_mod = new ShopAddress();
+	public function getAddress($shopName='roy', $id=0) {
 		$data = array();
+		$data["shopName"] = $this->shopName;
+		//var_dump($data);exit;
+		$user_address_mod = new ShopAddress();
 		if ($id) {
 			$info = $user_address_mod->find($id);
 			$data['info'] = $info;
 		}
 
 		$address_list = $user_address_mod->where('uid', '=', 1)->get();
-		$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
 		$data["address_list"] = $address_list;
-		$data["index_cate_list"] = $index_cate_list;
+		$data["item_class_list"] = $this->item_class_list;
 		return View::make('shop.default.User.address')->with($data);
 	}
 
@@ -73,8 +83,8 @@ class ShopUserController extends \BaseController {
 
 	public function getAddaddress()
 	{
-		$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
-		$data["index_cate_list"] = $index_cate_list;
+		$data["shopName"] = $this->shopName;
+		$data["item_class_list"] = $this->item_class_list;
 		return View::make('shop.default.User.addaddress')->with($data);
 	}
 
@@ -91,21 +101,21 @@ class ShopUserController extends \BaseController {
 		$user_address->uid = 1;
 
 		if($user_address->save()!==false){
-			return Redirect::to('shopuser/address');
+			return Redirect::to($this->shopName.'/shopuser/address');
 		}
 	}
 
-	public function getEditaddress($id=0)
+	public function getEditaddress($shopName='roy', $id=0)
 	{
-		$index_cate_list = ItemClass::where('status', '=', 1)->get() ?: array();
-		$data["index_cate_list"] = $index_cate_list;
+		$data["shopName"] = $this->shopName;
+		$data["item_class_list"] = $this->item_class_list;
 
 		$user_address = new ShopAddress();
 		$data["user_address"] = $user_address->find($id);
 		return View::make('shop.default.User.editaddress')->with($data);
 	}
 
-	public function postEditaddress($id=0){
+	public function postEditaddress($shopName='roy', $id=0){
 		$user_address = ShopAddress::find($id);
 		$user_address->consignee = Input::get("consignee");
 		$user_address->sheng = Input::get("sheng");
@@ -117,15 +127,15 @@ class ShopUserController extends \BaseController {
 		$user_address->uid = 1;
 
 		if($user_address->save()!==false){
-			return Redirect::to('shopuser/address');
+			return Redirect::to($this->shopName.'/shopuser/address');
 		}
 	}
 
-	public function getDeladdress($id=0)
+	public function getDeladdress($shopName='roy', $id=0)
 	{
 		$user_address = ShopAddress::find($id);
 		if($user_address->delete()!==false){
-			return Redirect::to('shopuser/address');
+			return Redirect::to($this->shopName.'/shopuser/address');
 		}
 	}
 }

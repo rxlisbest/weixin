@@ -7,7 +7,7 @@
 @include('shop/default/public/head')
 <div id="content">
 	<div id="warning"></div>
-    <form method="post" action="{{URL::to('shoporder/closeorder')}}/{{$orderId}}" >
+    <form method="post" action="{{URL::to($shopName.'/shoporder/closeorder')}}/{{$orderId}}" >
   
         <div class="order_cancel_box">
             <h1>您是否确定要取消以下订单？</h1>

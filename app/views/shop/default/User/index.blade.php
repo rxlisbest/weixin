@@ -15,29 +15,29 @@
 <div class="content">
     <h3 class="membertop">
        <p class="my_name"><a href="#">  {$visitor.username}</a></p>
-       <p class="my_address"><a href="{{URL::to('shopuser/address')}}">收货地址管理</a></p>
+       <p class="my_address"><a href="{{URL::to($shopName.'/shopuser/address')}}">收货地址管理</a></p>
     </h3>
     <ul class="buyer_stat">
             <li class="btn_1 
             @if($status==1)
             active
             @endif
-            "><a href="{{URL::to("shopuser/index")}}/1">待付款</a><span>待付款</span></li>        
+            "><a href="{{URL::to($shopName."/shopuser/index")}}/1">待付款</a><span>待付款</span></li>        
             <li class="btn_2 
             @if($status==2)
             active
             @endif
-            "><a href="{{URL::to("shopuser/index")}}/2">待发货</a><span>待发货</span></li>
+            "><a href="{{URL::to($shopName."/shopuser/index")}}/2">待发货</a><span>待发货</span></li>
             <li class="btn_3 
             @if($status==3)
             active
             @endif
-             "><a href="{{URL::to("shopuser/index")}}/3">待收货</a><span>待收货</span></li>
+             "><a href="{{URL::to($shopName."/shopuser/index")}}/3">待收货</a><span>待收货</span></li>
             <li class="btn_4 
             @if($status==4)
             active
             @endif
-            "><a href="{{URL::to("shopuser/index")}}/4">已完成</a><span>已完成</span></li>
+            "><a href="{{URL::to($shopName."/shopuser/index")}}/4">已完成</a><span>已完成</span></li>
     </ul>
 	<script type="text/javascript">
     $(function(){
@@ -73,15 +73,15 @@
                             </div>   
 			@if($vo["status"]==1)
                         	<a href="{:U('order/pay',array('orderId'=>$vo['orderId']))}" id="order118_action_pay" class="btn">付款</a><!--待付款 -->
-				<a href="{{URL::to('shoporder/cancelorder')}}/{{$vo['orderId']}}" id="order118_action_cancel"> 取消订单</a>
-                         	<a href="{{URL::to('shoporder/checkorder')}}/{{$vo['orderId']}}/{{$status}}" >查看订单</a>
+				<a href="{{URL::to($shopName.'/shoporder/cancelorder')}}/{{$vo['orderId']}}" id="order118_action_cancel"> 取消订单</a>
+                         	<a href="{{URL::to($shopName.'/shoporder/checkorder')}}/{{$vo['orderId']}}/{{$status}}" >查看订单</a>
 			@elseif($vo["status"]==2)<!--待发货 -->
-                         	<a href="{{URL::to('shoporder/checkorder')}}/{{$vo['orderId']}}/{{$status}}" >查看订单</a>
+                         	<a href="{{URL::to($shopName.'/shoporder/checkorder')}}/{{$vo['orderId']}}/{{$status}}" >查看订单</a>
 			@elseif($vo["status"]==3)<!-- 待收货 -->
-                            	<a href="{{URL::to('shoporder/confirmorder')}}/{{$vo['orderId']}}/{{$status}}" id="order118_action_confirm" >确认收货</a>
-                         	<a href="{{URL::to('shoporder/checkorder')}}/{{$vo['orderId']}}/{{$status}}" >查看订单</a>
+                            	<a href="{{URL::to($shopName.'/shoporder/confirmorder')}}/{{$vo['orderId']}}/{{$status}}" id="order118_action_confirm" >确认收货</a>
+                         	<a href="{{URL::to($shopName.'/shoporder/checkorder')}}/{{$vo['orderId']}}/{{$status}}" >查看订单</a>
 			@else
-                         	<a href="{{URL::to('shoporder/checkorder')}}/{{$vo['orderId']}}/{{$status}}" >查看订单</a>
+                         	<a href="{{URL::to($shopName.'/shoporder/checkorder')}}/{{$vo['orderId']}}/{{$status}}" >查看订单</a>
 			@endif
                         </div>
                     </div>

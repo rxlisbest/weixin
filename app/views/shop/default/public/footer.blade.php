@@ -1,6 +1,6 @@
 ﻿<div id="footer">
     <p class="foot_nav">
-        <a href="{{URL::to('shopindex/index')}}">商城首页</a> | <a href="{{URL::to('shopuser/index')}}">会员中心</a> | <a href="">品牌介绍</a>
+        <a href="{{URL::to($shopName.'/shopindex/index')}}">商城首页</a> | <a href="{{URL::to($shopName.'/shopuser/index')}}">会员中心</a> | <a href="">品牌介绍</a>
     </p>
     <div style="height:40px; background:#fff; padding:0; overflow:hidden;">
         <div style="float:left; margin:5px 10px 0 0; display:inline;"><img height="20" src="/statics/shop/default/weixin/images/logo.png"></div>

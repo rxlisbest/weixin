@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<include file="public:headtop" />
+@include('shop/default/public/headtop')
 </head>
 
 <body  onload="setup()" >
-<include file="public:head" />
+@include('shop/default/public/head')
 <div id="content">
-    <h4 class="add_title"><a class="enter" href="{:U('user/address')}">管理收货地址</a></h4>
+    <h4 class="add_title"><a class="enter" href="{{URL::to($shopName.'/shopuser/address')}}">管理收货地址</a></h4>
     <div class="order_address_list">
         <h4 class="add_title">收货人地址</h4>
-        <script type="text/javascript" src="__STATIC__/weixin/js/mlselection.js" charset="utf-8"></script>
-         <!-- <script type="text/javascript" src="__STATIC__/weixin/js/area.js" charset="utf-8"></script>-->
-        <script type="text/javascript" src="__STATIC__/weixin/js/jquery_003.js" charset="utf-8"></script>
-        <script type="text/javascript" src="__STATIC__/weixin/js/dialog.js" id="dialog_js" charset="utf-8"></script>
-        <link href="__STATIC__/weixin/css/dialog.css" rel="stylesheet" type="text/css">
-        <script type="text/javascript" src="__STATIC__/weixin/js/jquery.js" id="dialog_js" charset="utf-8"></script>
-        <script type="text/javascript" language="javascript" src='__STATIC__/weixin/js/dizhi2.js'></script>
-<script type="text/javascript" language="javascript" src='__STATIC__/weixin/js/diqu2.js'></script>
+        <script type="text/javascript" src="/statics/shop/default/js/mlselection.js" charset="utf-8"></script>
+         <!-- <script type="text/javascript" src="/statics/shop/default/js/area.js" charset="utf-8"></script>-->
+        <script type="text/javascript" src="/statics/shop/default/js/jquery_003.js" charset="utf-8"></script>
+        <script type="text/javascript" src="/statics/shop/default/js/dialog.js" id="dialog_js" charset="utf-8"></script>
+        <link href="/statics/shop/default/css/dialog.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="/statics/shop/default/js/jquery.js" id="dialog_js" charset="utf-8"></script>
+        <script type="text/javascript" language="javascript" src='/statics/shop/default/js/dizhi2.js'></script>
+<script type="text/javascript" language="javascript" src='/statics/shop/default/js/diqu2.js'></script>
        <script type="text/javascript">
 
        <script type="text/javascript">
@@ -125,17 +125,17 @@
         </script>
        
          
-       <form method="POST"  action="{:U('Order/pay')}" id="order_form" name="order_form"   >
-        <?php if(count($address_list)!=0){ ?>
+       <form method="POST"  action="{{URL::to($shopName.'/shoporder/createorder')}}" id="order_form" name="order_form"   >
+        @if(count($address_list)!=0)
         
-        <volist name='address_list' id='vo' >
+	@foreach($address_list as $vo)
         <ul class="receive_add address_item selected_address">
-            <li class="radio"><input id="address_{$vo.id}" checked="checked"  name="address_options" value="{$vo.id}" type="radio"></li>
-            <li class="particular">{$vo.sheng}&nbsp;{$vo.shi}&nbsp;{$vo.qu}&nbsp;{$vo.address}</li>
-            <li class="name">收货人姓名: {$vo.consignee}</li>
-            <li class="mobile">手机号码:{$vo.mobile}</li>
+            <li class="radio"><input id="address_{{$vo->id}}" checked="checked"  name="address_options" value="{{$vo->id}}" type="radio"></li>
+            <li class="particular">{{$vo->sheng}}&nbsp;{{$vo->shi}}&nbsp;{{$vo->qu}}&nbsp;{{$vo->address}}</li>
+            <li class="name">收货人姓名: {{$vo->consignee}}</li>
+            <li class="mobile">手机号码:{{$vo->mobile}}</li>
         </ul>
-       </volist>
+	@endforeach
         <ul class="new_receive_add address_item">
             <li class="radio">
             <input name="address_options" id="use_new_address" value="0"  type="radio">
@@ -178,7 +178,7 @@
                 </p>
             </li>
         </ul>
-        <?php }else{ ?>
+	@else
            <ul class="new_receive_add address_item">
             <li class="radio">
             <input checked='checked' name="address_options" id="use_new_address" value="0"  type="radio">
@@ -221,16 +221,16 @@
                 </p>
             </li>
         </ul>
-        <?php } ?>
+	@endif
         
     </div>			
     <div class="order_delivery">
-     <?php if($freesum<=0) {?>
+	@if($freesum<=0)
      卖家承担运费
-     <?php }else{ ?>
+	@else
         <h4 class="add_title">选择配送方式</h4>
         <div class="fashion_list">
-        <volist name='freearr' id='vo' key='k' >
+	@foreach($freearr as $k=>$vo)
               <ul class="receive_add" shipping_id="{$vo.value}">
                   <li class="radio"><input id="{$vo.price}" <if condition='$k eq 1'>checked="checked"</if>  name="shipping_id" value="{$vo.value}" type="radio"></li>
                   <li class="fashion">
@@ -244,7 +244,7 @@
                   <li class="explain"></li>
                   <input type="hidden" id="price_{$vo.value}" value="{$vo.price}" >
               </ul>
-        </volist>
+	@endforeach
             <!--   <ul class="receive_add" shipping_id="2">
                   <li class="radio"><input checked="checked" name="shipping_id" value="2" type="radio"></li>
                   <li class="fashion">快递</li>
@@ -258,7 +258,7 @@
                   <li class="explain"></li>
               </ul>-->
         </div>
-        <?php } ?>
+	@endif
     </div>
     <div class="message_box">
         <script type="text/javascript">
@@ -282,13 +282,13 @@
 
         <div>
             <a onclick="ordertj();" class="btn enter">下单完成并支付</a>
-            <a href="{:U('Shopcart/index')}" class="back">返回购物车</a>
+            <a href="{{URL::to($shopName.'/shopcart/index')}}" class="back">返回购物车</a>
         </div>
     </div>
     
-    <input type="hidden" id="summoney" value="{$sumPrice}" />
+    <input type="hidden" id="summoney" value="{{$sumPrice}}" />
 </div>
-<include file="public:footer" />
+@include('shop/default/public/footer')
 </body>
 </html>
 
@@ -317,13 +317,13 @@
           	
            if(addr_id !=null)
             {          
-            	var sumPrice='{$sumPrice}';
+            	var sumPrice='{{$sumPrice}}';
             	var freePrice= $('#price_'+addr_id).val();
             	$('#order_amount2').html(Number(freePrice)+Number(sumPrice));
             }
             else
             {
-            $('#order_amount2').html('{$sumPrice}');
+            $('#order_amount2').html('{{$sumPrice}}');
             }
           }
 		    </script>

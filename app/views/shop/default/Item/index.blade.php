@@ -69,7 +69,7 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
     function add_cart(goodId,quantity)//商品ID，购买数量
     {
     	
-     	var url  = "{{URL::to('shopcart/addcart')}}";
+     	var url  = "{{URL::to($shopName.'/shopcart/addcart')}}";
      	$.post(url,{goodId:goodId,quantity:quantity},function(data){
      		
      		if(data.status==1)
@@ -188,7 +188,7 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
                         <div class="ware_cen_btn">
                             <p class="ware_text_p">购物车内共有 <span class="bold_num"></span> 种商品 共计 <span class="bold_mly"></span></p>
                             <p class="ware_text_btn">
-                                <a href="{{URL::to('shopcart/index')}}"><input type="submit" onclick="#" value="查看购物车" name="" class="btn1"></a>
+                                <a href="{{URL::to($shopName.'/shopcart/index')}}"><input type="submit" onclick="#" value="查看购物车" name="" class="btn1"></a>
                                 <input type="submit" onclick="$('.ware_cen').css({'display':'none'});" value="继续挑选商品" name="" class="btn2">
                             </p>
                         </div>
